@@ -29,7 +29,6 @@ class Simulation extends PerformanceTestRunner {
   val baseUrl: String = bridgeIntegrationBaseUrl
 
   lazy val authToken: String = {
-    println(Console.GREEN + s"$baseUrl/bridge-integration/dashboard/123456789567" + Console.RESET)
     Await.result(
       getBearerToken(
         UUID.randomUUID().toString,
@@ -40,7 +39,6 @@ class Simulation extends PerformanceTestRunner {
   }
 
   def requestHeaders: Map[String, String] = {
-    println(Console.GREEN + authToken  + Console.RESET)
     Map(
     "Accept"        -> "application/vnd.hmrc.1.0+json",
     "Content-Type"  -> "application/json",
