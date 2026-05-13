@@ -28,21 +28,20 @@ class Simulation extends PerformanceTestRunner {
 
   val baseUrl: String = bridgeIntegrationBaseUrl
 
-  lazy val authToken: String = {
+  lazy val authToken: String =
     Await.result(
       getBearerToken(
-        UUID.randomUUID().toString,
+        UUID.randomUUID().toString
       ),
       60.seconds
     )
-  }
 
-  def requestHeaders: Map[String, String] = {
+  def requestHeaders: Map[String, String] =
     Map(
-    "Accept"        -> "application/vnd.hmrc.1.0+json",
-    "Content-Type"  -> "application/json",
-    "Authorization" -> s"$authToken"
-  )}
+      "Accept"        -> "application/vnd.hmrc.1.0+json",
+      "Content-Type"  -> "application/json",
+      "Authorization" -> s"$authToken"
+    )
 
   setup("dashboard", "Dashboard call") withRequests
     http("Dashboard")
@@ -55,7 +54,6 @@ class Simulation extends PerformanceTestRunner {
       .get(s"$baseUrl/bridge-integration/explore-ratepayer/123456789567")
       .headers(requestHeaders)
       .check(status.is(200))
-
 
   runSimulation()
 }

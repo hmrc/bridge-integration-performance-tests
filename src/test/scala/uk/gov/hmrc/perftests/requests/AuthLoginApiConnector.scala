@@ -48,7 +48,7 @@ object AuthLoginApiConnector extends JavaFuturesConversion {
             "credentialStrength" -> "strong",
             "enrolments"         -> Json.arr(),
             "nino"               -> "AA000003D",
-            "itmpData" -> Json.obj(
+            "itmpData"           -> Json.obj(
               "givenName"  -> "Performance Test User",
               "familyName" -> "Performance Test User",
               "birthdate"  -> "1948-04-23"
