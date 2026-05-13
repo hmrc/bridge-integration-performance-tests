@@ -32,9 +32,8 @@ class Simulation extends PerformanceTestRunner {
     Await.result(
       getBearerToken(
         UUID.randomUUID().toString,
-        UUID.randomUUID().toString
       ),
-      10.seconds
+      60.seconds
     )
   }
 
