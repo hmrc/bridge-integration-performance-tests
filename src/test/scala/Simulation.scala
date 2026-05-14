@@ -36,6 +36,8 @@ class Simulation extends PerformanceTestRunner {
       60.seconds
     )
 
+  println(Console.MAGENTA + authToken + Console.RESET)
+
   def requestHeaders: Map[String, String] =
     Map(
       "Accept"        -> "application/vnd.hmrc.1.0+json",

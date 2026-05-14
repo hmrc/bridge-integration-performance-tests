@@ -32,8 +32,10 @@ object AuthLoginApiConnector extends JavaFuturesConversion {
 
   val loginStubUrl: String = s"$authLoginApiBaseUrl/government-gateway/session/login"
 
-  def getBearerToken(credId: String): Future[String] =
+  def getBearerToken(credId: String): Future[String] = {
+    println(Console.GREEN + s"Authenticating (Getting Bearer Token for $credId) with $Authorization" + Console.RESET)
     login(credId).map(_.getHeader(Authorization))
+  }
 
   def login(credId: String): Future[Response] =
     client
