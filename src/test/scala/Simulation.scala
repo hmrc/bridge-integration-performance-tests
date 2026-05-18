@@ -76,5 +76,11 @@ class Simulation extends PerformanceTestRunner {
       .body(StringBody(linkPropertyJobJson))
       .check(status.in(200, 400, 404, 502, 500))
 
+  setup("ratePayerProperties", "Ratepayer Properties call") withRequests
+    http("RatePayerProperties")
+      .get(s"$baseUrl/bridge-integration/ratepayer-properties/123456789567")
+      .headers(requestHeaders)
+      .check(status.is(200))
+
   runSimulation()
 }
