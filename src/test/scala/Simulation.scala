@@ -16,6 +16,7 @@
 
 import io.gatling.core.Predef._
 import io.gatling.http.Predef._
+import uk.gov.hmrc.perftests.utils.Payloads._
 import uk.gov.hmrc.performance.simulation.PerformanceTestRunner
 import uk.gov.hmrc.perftests.requests.AuthLoginApiConnector.getBearerToken
 import uk.gov.hmrc.perftests.utils.BaseUrls.bridgeIntegrationBaseUrl
@@ -60,6 +61,26 @@ class Simulation extends PerformanceTestRunner {
       .get(s"$baseUrl/bridge-integration/ratepayer-properties/123456789567")
       .headers(requestHeaders)
       .check(status.is(200))
+
+  setup("exploreRatepayer", "Explore Ratepayer call") withRequests
+    http("ExploreRatepayer")
+      .get(s"$baseUrl/bridge-integration/explore-ratepayer/123456789567")
+      .headers(requestHeaders)
+      .check(status.is(200))
+
+  setup("registerRatepayer", "Register Ratepayer call") withRequests
+    http("RegisterRatepayer")
+      .post(s"$baseUrl/bridge-integration/register-ratepayer/123456789567")
+      .headers(requestHeaders)
+      .body(StringBody(registerRatepayerJson))
+      .check(status.in(200, 400, 404, 502, 500))
+
+  setup("linkPropertyJob", "Property Linking Relationship Change call") withRequests
+    http("LinkPropertyJob")
+      .post(s"$baseUrl/bridge-integration/property-linking/123456789567/relationship-change/999999")
+      .headers(requestHeaders)
+      .body(StringBody(linkPropertyJobJson))
+      .check(status.in(200, 400, 404, 502, 500))
 
   runSimulation()
 }
