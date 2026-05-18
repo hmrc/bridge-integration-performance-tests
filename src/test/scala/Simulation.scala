@@ -28,22 +28,20 @@ class Simulation extends PerformanceTestRunner {
 
   val baseUrl: String = bridgeIntegrationBaseUrl
 
-  lazy val authToken: String = {
+  lazy val authToken: String =
     Await.result(
       getBearerToken(
-        UUID.randomUUID().toString,
         UUID.randomUUID().toString
       ),
-      10.seconds
+      60.seconds
     )
-  }
 
-  def requestHeaders: Map[String, String] = {
+  def requestHeaders: Map[String, String] =
     Map(
-    "Accept"        -> "application/vnd.hmrc.1.0+json",
-    "Content-Type"  -> "application/json",
-    "Authorization" -> s"$authToken"
-  )}
+      "Accept"        -> "application/vnd.hmrc.1.0+json",
+      "Content-Type"  -> "application/json",
+      "Authorization" -> s"$authToken"
+    )
 
   setup("dashboard", "Dashboard call") withRequests
     http("Dashboard")

@@ -19,6 +19,6 @@ package uk.gov.hmrc.perftests.utils
 import uk.gov.hmrc.performance.conf.ServicesConfiguration
 
 object BaseUrls extends ServicesConfiguration {
-  val authLoginApiBaseUrl: String = baseUrlFor("auth-login-api")
+  val authLoginApiBaseUrl: String      = baseUrlFor("auth-login-api")
   val bridgeIntegrationBaseUrl: String = baseUrlFor("bridge-integration")
 }

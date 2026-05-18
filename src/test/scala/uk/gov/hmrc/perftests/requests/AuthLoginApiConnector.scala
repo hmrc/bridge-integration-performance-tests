@@ -32,10 +32,10 @@ object AuthLoginApiConnector extends JavaFuturesConversion {
 
   val loginStubUrl: String = s"$authLoginApiBaseUrl/government-gateway/session/login"
 
-  def getBearerToken(credId: String, ggGroupId: String): Future[String] =
-    login(credId, ggGroupId).map(_.getHeader(Authorization))
+  def getBearerToken(credId: String): Future[String] =
+    login(credId).map(_.getHeader(Authorization))
 
-  def login(credId: String, groupId: String): Future[Response] =
+  def login(credId: String): Future[Response] =
     client
       .preparePost(loginStubUrl)
       .setBody(
@@ -48,7 +48,7 @@ object AuthLoginApiConnector extends JavaFuturesConversion {
             "credentialStrength" -> "strong",
             "enrolments"         -> Json.arr(),
             "nino"               -> "AA000003D",
-            "itmpData" -> Json.obj(
+            "itmpData"           -> Json.obj(
               "givenName"  -> "Performance Test User",
               "familyName" -> "Performance Test User",
               "birthdate"  -> "1948-04-23"
