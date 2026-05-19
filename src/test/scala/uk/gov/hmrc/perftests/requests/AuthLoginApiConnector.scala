@@ -16,46 +16,42 @@
 
 package uk.gov.hmrc.perftests.requests
 
-import io.gatling.http.HeaderNames._
-import org.asynchttpclient.Dsl.asyncHttpClient
-import org.asynchttpclient.{AsyncHttpClient, Response}
+import client.WsClient
 import play.api.libs.json.Json
 import uk.gov.hmrc.perftests.utils.BaseUrls.authLoginApiBaseUrl
 import uk.gov.hmrc.perftests.utils.JavaFuturesConversion
 
-import scala.concurrent.ExecutionContext.Implicits.global
-import scala.concurrent.Future
-
 object AuthLoginApiConnector extends JavaFuturesConversion {
 
-  val client: AsyncHttpClient = asyncHttpClient()
+  def createBearerToken(
+                         credId: String
+                       ): String = {
 
-  val loginStubUrl: String = s"$authLoginApiBaseUrl/government-gateway/session/login"
-
-  def getBearerToken(credId: String): Future[String] =
-    login(credId).map(_.getHeader(Authorization))
-
-  def login(credId: String): Future[Response] =
-    client
-      .preparePost(loginStubUrl)
-      .setBody(
-        Json
-          .obj(
-            "credId"             -> credId,
-            "excludeGnapToken"   -> true,
-            "affinityGroup"      -> "Individual",
-            "confidenceLevel"    -> 250,
-            "credentialStrength" -> "strong",
-            "enrolments"         -> Json.arr(),
-            "nino"               -> "AA000003D",
-            "itmpData"           -> Json.obj(
-              "givenName"  -> "Performance Test User",
-              "familyName" -> "Performance Test User",
-              "birthdate"  -> "1948-04-23"
-            )
+    def createLocalBearerToken(credId: String) = {
+      val json =
+        Json.obj(
+          "credId"             -> credId,
+          "excludeGnapToken"   -> true,
+          "affinityGroup"      -> "Individual",
+          "confidenceLevel"    -> 250,
+          "credentialStrength" -> "strong",
+          "enrolments"         -> Json.arr(),
+          "nino"               -> "AA000003D",
+          "itmpData"           -> Json.obj(
+            "givenName"  -> "Performance Test User",
+            "familyName" -> "Performance Test User",
+            "birthdate"  -> "1948-04-23"
           )
-          .toString()
-      )
-      .setHeader("Content-Type", "application/json")
-      .execute()
+        )
+
+      val response                                     = WsClient.post(s"$authLoginApiBaseUrl/government-gateway/session/login", Map("Content-Type" -> "application/json"), json)
+      val authHeader: (String, collection.Seq[String]) =
+        response.headers.filter(header => header._1.equalsIgnoreCase("Authorization")).head
+      val authBearerToken                              = authHeader._2.head.replace("Bearer ", "")
+      authBearerToken
+    }
+
+    val bearerToken: String = createLocalBearerToken(credId)
+    bearerToken
+  }
 }
