@@ -18,7 +18,7 @@ import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 import uk.gov.hmrc.perftests.utils.Payloads._
 import uk.gov.hmrc.performance.simulation.PerformanceTestRunner
-import uk.gov.hmrc.perftests.requests.AuthLoginApiConnector.getBearerToken
+import uk.gov.hmrc.perftests.requests.AuthLoginApiConnector.{createBearerToken}
 import uk.gov.hmrc.perftests.utils.BaseUrls.bridgeIntegrationBaseUrl
 
 import java.util.UUID
@@ -29,19 +29,13 @@ class Simulation extends PerformanceTestRunner {
 
   val baseUrl: String = bridgeIntegrationBaseUrl
 
-  lazy val authToken: String =
-    Await.result(
-      getBearerToken(
-        UUID.randomUUID().toString
-      ),
-      60.seconds
-    )
+  val bearerToken = createBearerToken("123456789567")
 
   def requestHeaders: Map[String, String] =
     Map(
       "Accept"        -> "application/vnd.hmrc.1.0+json",
       "Content-Type"  -> "application/json",
-      "Authorization" -> s"$authToken"
+      "Authorization" -> s"Bearer $bearerToken"
     )
 
   setup("dashboard", "Dashboard call") withRequests
