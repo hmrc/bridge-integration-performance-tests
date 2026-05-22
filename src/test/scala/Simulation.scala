@@ -44,12 +44,6 @@ class Simulation extends PerformanceTestRunner {
       .headers(requestHeaders)
       .check(status.is(200))
 
-  setup("getRatepayerProperties", "Explore Ratepayer Properties call") withRequests
-    http("GetRatepayerProperties")
-      .get(s"$baseUrl/bridge-integration/ratepayer-properties/123456789567")
-      .headers(requestHeaders)
-      .check(status.is(200))
-
   setup("exploreRatepayer", "Explore Ratepayer call") withRequests
     http("ExploreRatepayer")
       .get(s"$baseUrl/bridge-integration/explore-ratepayer/123456789567")
@@ -69,6 +63,12 @@ class Simulation extends PerformanceTestRunner {
       .headers(requestHeaders)
       .body(StringBody(linkPropertyJobJson))
       .check(status.in(200, 400, 404, 502, 500))
+
+  setup("getRatepayerProperties", "Explore Ratepayer Properties call") withRequests
+    http("GetRatepayerProperties")
+      .get(s"$baseUrl/bridge-integration/ratepayer-properties/123456789567")
+      .headers(requestHeaders)
+      .check(status.is(200))
 
   setup("ratePayerProperties", "Ratepayer Properties call") withRequests
     http("RatePayerProperties")
