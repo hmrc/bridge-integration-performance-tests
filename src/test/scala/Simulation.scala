@@ -50,6 +50,12 @@ class Simulation extends PerformanceTestRunner {
       .headers(requestHeaders)
       .check(status.is(200))
 
+  setup("ratePayerProperties", "Ratepayer Properties call") withRequests
+    http("RatePayerProperties")
+      .get(s"$baseUrl/bridge-integration/ratepayer-properties/123456789567")
+      .headers(requestHeaders)
+      .check(status.is(200))
+
   setup("registerRatepayer", "Register Ratepayer call") withRequests
     http("RegisterRatepayer")
       .post(s"$baseUrl/bridge-integration/register-ratepayer/123456789567")
@@ -66,12 +72,6 @@ class Simulation extends PerformanceTestRunner {
 
   setup("getRatepayerProperties", "Explore Ratepayer Properties call") withRequests
     http("GetRatepayerProperties")
-      .get(s"$baseUrl/bridge-integration/ratepayer-properties/123456789567")
-      .headers(requestHeaders)
-      .check(status.is(200))
-
-  setup("ratePayerProperties", "Ratepayer Properties call") withRequests
-    http("RatePayerProperties")
       .get(s"$baseUrl/bridge-integration/ratepayer-properties/123456789567")
       .headers(requestHeaders)
       .check(status.is(200))
