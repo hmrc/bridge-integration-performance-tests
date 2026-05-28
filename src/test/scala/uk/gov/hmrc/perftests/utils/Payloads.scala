@@ -77,4 +77,31 @@ object Payloads {
       |}
       |""".stripMargin
 
+  val propertyAssessmentJson: String =
+    """
+      |{
+      |  "properties": [
+      |    {
+      |      "label": "Perf Test Property",
+      |      "description": "Performance Test Submission",
+      |      "data": {
+      |        "foreign_ids": [],
+      |        "foreign_names": [],
+      |        "foreign_labels": [],
+      |        "addresses": {
+      |          "property_full_address": "13, NEW GEORGE STREET, PLYMOUTH, PL1 1RL",
+      |          "address_line_1": "13",
+      |          "address_postcode": "PL1 1RL",
+      |          "known_as": "Perf Test"
+      |        },
+      |        "location": null,
+      |        "assessments": null
+      |      }
+      |    }
+      |  ]
+      |}
+      |""".stripMargin
+
+
+
 }
