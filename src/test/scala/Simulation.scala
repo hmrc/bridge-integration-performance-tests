@@ -70,11 +70,13 @@ class Simulation extends PerformanceTestRunner {
       .headers(requestHeaders)
       .check(status.is(200))
 
-  setup("getRatepayerProperties", "Explore Ratepayer Properties call") withRequests
-    http("GetRatepayerProperties")
-      .get(s"$baseUrl/bridge-integration/ratepayer-properties/123456789567")
+  setup("propertyAssessment", "Property Assessment call") withRequests
+    http("PropertyAssessment")
+      .post(s"$baseUrl/bridge-integration/property-assessment/123456789567/assessment/27399677000")
       .headers(requestHeaders)
-      .check(status.is(200))
+      .body(StringBody(propertyAssessmentJson))
+      .check(status.in(200))
+
 
   runSimulation()
 }
