@@ -77,6 +77,19 @@ class Simulation extends PerformanceTestRunner {
       .body(StringBody(propertyAssessmentJson))
       .check(status.in(200))
 
+  setup("searchCTPostcode", "Search CT Postcode Call") withRequests
+    http("SearchCTPostcode")
+      .get(s"$baseUrl/bridge-integration/postcode/SY231NZ/CVW")
+      .headers(requestHeaders)
+      .body(StringBody(CtWalesPostcodeSearchJson))
+      .check(status.in(200))
+
+  setup("searchFMBRPostcode", "Search FMBR Postcode Call") withRequests
+    http("SearchCTPostcode")
+      .get(s"$baseUrl/bridge-integration/postcode/SY231NZ/FMBR")
+      .headers(requestHeaders)
+      .body(StringBody(CtWalesPostcodeSearchJson))
+      .check(status.in(200))
 
   runSimulation()
 }
