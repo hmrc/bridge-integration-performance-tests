@@ -102,6 +102,68 @@ object Payloads {
       |}
       |""".stripMargin
 
-
-
+  val CtWalesPostcodeSearchJson: String =
+    """
+      |{
+      |  "request": {
+      |    "method": "GET",
+      |    "urlPath": "/bridge-integration-stub/hip/voa/v1/search",
+      |    "queryParameters": {
+      |      "postcode": {
+      |        "equalTo": "SY231NZ"
+      |      },
+      |      "listType": {
+      |        "equalTo": "CVW"
+      |      }
+      |    }
+      |  },
+      |  "response": {
+      |    "status": 200,
+      |    "jsonBody": {
+      |      "results": {
+      |        "current_page": 1,
+      |        "page_size": 1,
+      |        "total_results": 102,
+      |        "total_pages": 102,
+      |        "has_next": true,
+      |        "has_previous": false,
+      |        "self": "https://example.com/ct-wales-searches?page=1&page_size=1",
+      |        "next": "https://example.com/ct-wales-searches?page=2&page_size=1",
+      |        "prev": null,
+      |        "first": "https://example.com/ct-wales-searches?page=1&page_size=1",
+      |        "last": "https://example.com/ct-wales-searches?page=102&page_size=1",
+      |        "records": [
+      |          {
+      |            "list": {
+      |              "id": "35438729-ccc6-4977-915a-65424dc56f4a",
+      |              "classification": {
+      |                "code": "CVW",
+      |                "label": "Council tax valuation list for a billing authority in Wales (LGFA92s22B2(b)to3A)"
+      |              },
+      |              "collection_authority": {
+      |                "ons_code": "W07000064",
+      |                "ons_code_label": "Ceredigion | Ceredigion"
+      |              }
+      |            },
+      |            "list_entry": {
+      |              "relevant_property": {
+      |                "id": "5d3bd996-d0df-4688-b8ad-36487dab6d27"
+      |              },
+      |              "addresses": {
+      |                "property_full_address": "30 CAMBRIAN STREET, ABERYSTWYTH, SY23 1NZ"
+      |              },
+      |              "valuation": {
+      |                "value": "D"
+      |              }
+      |            }
+      |          }
+      |        ]
+      |      }
+      |    },
+      |    "headers": {
+      |      "Content-Type": "application/json"
+      |    }
+      |  }
+      |}
+      |""".stripMargin
 }
