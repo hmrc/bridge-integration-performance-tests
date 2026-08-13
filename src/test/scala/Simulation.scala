@@ -91,5 +91,11 @@ class Simulation extends PerformanceTestRunner {
       .body(StringBody(CtWalesPostcodeSearchJson))
       .check(status.in(200))
 
+  setup("explore", "Explore call") withRequests
+    http("Explore")
+      .get(s"$baseUrl/bridge-integration/explore")
+      .headers(requestHeaders)
+      .check(status.in(200, 400, 404, 502, 500))
+
   runSimulation()
 }
