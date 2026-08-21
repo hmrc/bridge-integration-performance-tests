@@ -18,7 +18,7 @@ import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 import uk.gov.hmrc.perftests.utils.Payloads._
 import uk.gov.hmrc.performance.simulation.PerformanceTestRunner
-import uk.gov.hmrc.perftests.requests.AuthLoginApiConnector.{createBearerToken}
+import uk.gov.hmrc.perftests.requests.AuthLoginApiConnector.createBearerToken
 import uk.gov.hmrc.perftests.utils.BaseUrls.bridgeIntegrationBaseUrl
 
 import java.util.UUID
@@ -81,14 +81,12 @@ class Simulation extends PerformanceTestRunner {
     http("SearchCTPostcode")
       .get(s"$baseUrl/bridge-integration/postcode/SY231NZ/CVW")
       .headers(requestHeaders)
-      .body(StringBody(CtWalesPostcodeSearchJson))
       .check(status.in(200))
 
   setup("searchFMBRPostcode", "Search FMBR Postcode Call") withRequests
     http("searchFMBRPostcode")
       .get(s"$baseUrl/bridge-integration/postcode/SY231NZ/FMBR")
       .headers(requestHeaders)
-      .body(StringBody(CtWalesPostcodeSearchJson))
       .check(status.in(200))
 
   setup("explore", "Explore call") withRequests
