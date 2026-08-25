@@ -85,7 +85,7 @@ class Simulation extends PerformanceTestRunner {
 
   setup("searchFMBRPostcode", "Search FMBR Postcode Call") withRequests
     http("searchFMBRPostcode")
-      .get(s"$baseUrl/bridge-integration/postcode/SY231NZ/FMBR")
+      .get(s"$baseUrl/bridge-integration/postcode/SY231NZ/FBR")
       .headers(requestHeaders)
       .check(status.in(200))
 
