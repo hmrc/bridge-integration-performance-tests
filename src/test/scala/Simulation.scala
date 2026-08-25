@@ -77,23 +77,23 @@ class Simulation extends PerformanceTestRunner {
       .body(StringBody(propertyAssessmentJson))
       .check(status.in(200))
 
-  setup("searchCTPostcode", "Search CT Postcode Call") withRequests
-    http("SearchCTPostcode")
-      .get(s"$baseUrl/bridge-integration/postcode/SY231NZ/CVW")
-      .headers(requestHeaders)
-      .check(status.in(200))
-
-  setup("searchFMBRPostcode", "Search FMBR Postcode Call") withRequests
-    http("searchFMBRPostcode")
-      .get(s"$baseUrl/bridge-integration/postcode/SY231NZ/FBR")
-      .headers(requestHeaders)
-      .check(status.in(200))
-
-  setup("explore", "Explore call") withRequests
-    http("Explore")
-      .get(s"$baseUrl/bridge-integration/explore")
-      .headers(requestHeaders)
-      .check(status.in(200, 400, 404, 502, 500))
+//  setup("searchCTPostcode", "Search CT Postcode Call") withRequests
+//    http("SearchCTPostcode")
+//      .get(s"$baseUrl/bridge-integration/postcode/SY231NZ/CVW")
+//      .headers(requestHeaders)
+//      .check(status.in(200))
+//
+//  setup("searchFMBRPostcode", "Search FMBR Postcode Call") withRequests
+//    http("searchFMBRPostcode")
+//      .get(s"$baseUrl/bridge-integration/postcode/SY231NZ/FMBR")
+//      .headers(requestHeaders)
+//      .check(status.in(200))
+//
+//  setup("explore", "Explore call") withRequests
+//    http("Explore")
+//      .get(s"$baseUrl/bridge-integration/explore")
+//      .headers(requestHeaders)
+//      .check(status.in(200, 400, 404, 502, 500))
 
   runSimulation()
 }
