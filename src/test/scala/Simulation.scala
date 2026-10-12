@@ -82,8 +82,8 @@ class Simulation extends PerformanceTestRunner {
       .get(s"$baseUrl/bridge-integration/search?postcode=SY231NZ&listType=CVW")
       .check(status.in(200))
 
-  setup("advanceSearchCTPostcode", "Advance Search CT Postcode Call") withRequests
-    http("AdvanceSearchCTPostcode")
+  setup("advancedSearchCTPostcode", "Advanced Search CT Postcode Call") withRequests
+    http("AdvancedSearchCTPostcode")
       .get(s"$baseUrl/bridge-integration/search?postcode=SY231NZ&listType=CVW&page=1&page_size=5&councilTaxBand=D")
       .check(status.in(200))
 
