@@ -79,14 +79,17 @@ class Simulation extends PerformanceTestRunner {
 
   setup("searchCTPostcode", "Search CT Postcode Call") withRequests
     http("SearchCTPostcode")
-      .get(s"$baseUrl/bridge-integration/postcode/SY231NZ/CVW")
-      .headers(requestHeaders)
+      .get(s"$baseUrl/bridge-integration/search?postcode=SY231NZ&listType=CVW")
+      .check(status.in(200))
+
+  setup("advanceSearchCTPostcode", "Advance Search CT Postcode Call") withRequests
+    http("AdvanceSearchCTPostcode")
+      .get(s"$baseUrl/bridge-integration/search?postcode=SY231NZ&listType=CVW&page=1&page_size=5&councilTaxBand=D")
       .check(status.in(200))
 
   setup("searchFMBRPostcode", "Search FMBR Postcode Call") withRequests
     http("searchFMBRPostcode")
-      .get(s"$baseUrl/bridge-integration/postcode/SY231NZ/FBR")
-      .headers(requestHeaders)
+      .get(s"$baseUrl/bridge-integration/search?postcode=SY231NZ&listType=FBR")
       .check(status.in(200))
 
   setup("explore", "Explore call") withRequests
