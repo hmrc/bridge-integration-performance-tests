@@ -98,5 +98,11 @@ class Simulation extends PerformanceTestRunner {
       .headers(requestHeaders)
       .check(status.in(200, 400, 404, 502, 500))
 
+  setup("postEnquiry", "Post Enquiry call") withRequests
+    http("PostEnquiry")
+      .post(s"$baseUrl/bridge-integration/enquiries/6A7D3B18-E92A-47AB-8795-82B6D1E78069/CVW")
+      .headers(requestHeaders)
+      .body(StringBody(enquiryRequestJson))
+      .check(status.in(200))
   runSimulation()
 }
