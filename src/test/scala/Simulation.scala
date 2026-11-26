@@ -64,11 +64,11 @@ class Simulation extends PerformanceTestRunner {
       .body(StringBody(linkPropertyJobJson))
       .check(status.in(200, 400, 404, 502, 500))
 
-  setup("ratePayerProperties", "Ratepayer Properties call") withRequests
-    http("RatePayerProperties")
-      .get(s"$baseUrl/bridge-integration/ratepayer-properties/123456789567")
-      .headers(requestHeaders)
-      .check(status.is(200))
+//  setup("ratePayerProperties", "Ratepayer Properties call") withRequests
+//    http("RatePayerProperties")
+//      .get(s"$baseUrl/bridge-integration/ratepayer-properties/123456789567")
+//      .headers(requestHeaders)
+//      .check(status.is(200))
 
   //TODO Commented out as the endpoint is not working
 //  setup("propertyAssessment", "Property Assessment call") withRequests
@@ -102,7 +102,7 @@ class Simulation extends PerformanceTestRunner {
 
   setup("postEnquiry", "Post Enquiry call") withRequests
     http("PostEnquiry")
-      .post(s"$baseUrl/bridge-integration/enquiries/D31AD68E-1459-4D59-A320-60C68A924D8E/CVW")
+      .post(s"$baseUrl/bridge-integration/enquiries/08767223-B323-41BF-B602-58CDE343FFBE/CVW")
       .headers(requestHeaders)
       .body(StringBody(enquiryRequestJson))
       .check(status.in(200))
